@@ -1,4 +1,5 @@
 import 'package:expenseapp/models/expense.dart';
+import 'package:expenseapp/widgets/expense_item.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseList extends StatefulWidget {
@@ -27,27 +28,33 @@ class _ExpenseListState extends State<ExpenseList> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: expenses.length,
-            itemBuilder: (context, index) {
-              return Text(expenses[index].name);
-            },
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 150,
+            child: Text("Grafik"),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 300, bottom: 30),
-          child: FloatingActionButton(
-            onPressed: () {},
-            child: Icon(Icons.add, color: Colors.white),
-            backgroundColor: Colors.green,
+          Expanded(
+            child: ListView.builder(
+              itemCount: expenses.length,
+              itemBuilder: (context, index) {
+                return ExpenseItem(expenses[index]);
+              },
+            ),
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(left: 300, bottom: 30),
+            child: FloatingActionButton(
+              onPressed: () {},
+              child: Icon(Icons.add, color: Colors.white),
+              backgroundColor: Colors.green,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

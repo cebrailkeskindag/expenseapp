@@ -1,20 +1,15 @@
-import 'package:expenseapp/pages/expense_list.dart';
+import 'package:expenseapp/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
+// Single Responsibility
 void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.red.shade300,
-          title: const Text(
-            "Expense App",
-            style: TextStyle(fontWeight: FontWeight.w400),
-          ),
-        ),
-        body: ExpenseList(),
-      ),
+      theme: ThemeData(useMaterial3: true),
+      home: const MainPage(),
     ),
   );
 }
+
+// modelleme => üzerinde çalışılacak yapıların uygulamada nesne haline getirilmesi
