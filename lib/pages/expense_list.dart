@@ -13,13 +13,23 @@ class _ExpenseListState extends State<ExpenseList> {
   // dummy data
   final List<Expense> expenses = [
     Expense(
-        name: "Yiyecek",
-        price: 200,
+        name: "Pizza",
+        price: 200.65,
         date: DateTime.now(),
         category: Category.food),
     Expense(
+        name: "Mühendis",
+        price: 45000,
+        date: DateTime.now(),
+        category: Category.work),
+    Expense(
+        name: "Uludag Turu",
+        price: 2500.65,
+        date: DateTime.now(),
+        category: Category.travel),
+    Expense(
         name: "Flutter Udemy Course",
-        price: 200,
+        price: 10500,
         date: DateTime.now(),
         category: Category.education),
   ]; // firebase,veritabanı
@@ -33,9 +43,19 @@ class _ExpenseListState extends State<ExpenseList> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 150,
-            child: Text("Grafik"),
+            child: Text(
+              "Grafik",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 10.0),
+            child: Text(
+              "Expense Listesi",
+              style: TextStyle(fontSize: 20),
+            ),
           ),
           Expanded(
             child: ListView.builder(
@@ -43,14 +63,6 @@ class _ExpenseListState extends State<ExpenseList> {
               itemBuilder: (context, index) {
                 return ExpenseItem(expenses[index]);
               },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 300, bottom: 30),
-            child: FloatingActionButton(
-              onPressed: () {},
-              child: Icon(Icons.add, color: Colors.white),
-              backgroundColor: Colors.green,
             ),
           ),
         ],
