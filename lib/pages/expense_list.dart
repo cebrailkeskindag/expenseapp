@@ -3,39 +3,15 @@ import 'package:expenseapp/widgets/expense_item.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseList extends StatefulWidget {
-  const ExpenseList({Key? key}) : super(key: key);
+  const ExpenseList(this.expenses, this.onRemove, {Key? key}) : super(key: key);
+  final List<Expense> expenses;
+  final void Function(Expense expense) onRemove;
 
   @override
   _ExpenseListState createState() => _ExpenseListState();
 }
 
 class _ExpenseListState extends State<ExpenseList> {
-  // dummy data
-  final List<Expense> expenses = [
-    Expense(
-        name: "Pizza",
-        price: 200.65,
-        date: DateTime.now(),
-        category: Category.food),
-    Expense(
-        name: "Mühendis",
-        price: 45000,
-        date: DateTime.now(),
-        category: Category.work),
-    Expense(
-        name: "Uludag Turu",
-        price: 2500.65,
-        date: DateTime.now(),
-        category: Category.travel),
-    Expense(
-        name: "Flutter Udemy Course",
-        price: 10500,
-        date: DateTime.now(),
-        category: Category.education),
-  ]; // firebase,veritabanı
-
-  // ListView render
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -45,23 +21,22 @@ class _ExpenseListState extends State<ExpenseList> {
         children: [
           const SizedBox(
             height: 150,
-            child: Text(
-              "Grafik",
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 10.0),
-            child: Text(
-              "Expense Listesi",
-              style: TextStyle(fontSize: 20),
-            ),
+            child: Text("Grafik"),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: expenses.length,
+              itemCount: widget.expenses.length,
               itemBuilder: (context, index) {
-                return ExpenseItem(expenses[index]);
+                return Dismissible(
+                  key: ValueKey(widget.expenses[index]),
+                  child: ExpenseItem(widget.expenses[index]),
+                  onDismissed: (direction) {
+                    if (direction == DismissDirection.startToEnd) {
+                      // soldan sağa ise
+                    }
+                    widget.onRemove(widget.expenses[index]);
+                  },
+                );
               },
             ),
           ),
@@ -70,3 +45,4 @@ class _ExpenseListState extends State<ExpenseList> {
     );
   }
 }
+// Topbar eklemek vs..

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({Key? key}) : super(key: key);
+  const NewExpense({Key? key, required this.onAdd}) : super(key: key);
+
+  final void Function(Expense expense) onAdd;
 
   @override
   _NewExpenseState createState() => _NewExpenseState();
@@ -84,6 +86,13 @@ class _NewExpenseState extends State<NewExpense> {
     } else {
       // valid bir değer
       // listeye ekleme yapılması gereken nokta..
+      Expense expense = Expense(
+          name: _nameController.text,
+          price: amount,
+          date: _selectedDate!,
+          category: _selectedCategory);
+      widget.onAdd(expense);
+      Navigator.pop(context);
     }
   }
 
@@ -149,31 +158,18 @@ class _NewExpenseState extends State<NewExpense> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  "Vazgeç",
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.red)),
-              ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Vazgeç")),
               const SizedBox(
                 width: 30,
               ),
               ElevatedButton(
-                onPressed: () {
-                  _addNewExpense();
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  "Kaydet",
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.green)),
-              ),
+                  onPressed: () {
+                    _addNewExpense();
+                  },
+                  child: const Text("Kaydet")),
             ],
           )
         ],

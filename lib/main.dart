@@ -1,14 +1,11 @@
+import 'package:expenseapp/pages/expense_list.dart';
 import 'package:expenseapp/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 // Single Responsibility
 void main() {
   runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true),
-      home: const MainPage(),
-    ),
+    MaterialApp(theme: ThemeData(useMaterial3: true), home: MainPage()),
   );
 }
 
