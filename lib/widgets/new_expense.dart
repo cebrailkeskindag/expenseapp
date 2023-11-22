@@ -161,7 +161,7 @@ class _NewExpenseState extends State<NewExpense> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text("Vazgeç")),
+                  child: const Text("Vazgeç", style: TextStyle(color: Colors.red),)),
               const SizedBox(
                 width: 30,
               ),

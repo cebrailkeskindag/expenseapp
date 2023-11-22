@@ -12,6 +12,15 @@ class ExpenseList extends StatefulWidget {
 }
 
 class _ExpenseListState extends State<ExpenseList> {
+  List<Expense> removedExpenses = [];
+
+  void undoRemoveExpense(int index) {
+    Expense removedExpense = removedExpenses.removeAt(0);
+    setState(() {
+      widget.expenses.insert(index, removedExpense);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -31,10 +40,37 @@ class _ExpenseListState extends State<ExpenseList> {
                   key: ValueKey(widget.expenses[index]),
                   child: ExpenseItem(widget.expenses[index]),
                   onDismissed: (direction) {
-                    if (direction == DismissDirection.startToEnd) {
-                      // soldan sağa ise
-                    }
-                    widget.onRemove(widget.expenses[index]);
+                    Expense removedExpense = widget.expenses[index];
+                    widget.onRemove(removedExpense);
+                    setState(() {
+                      removedExpenses.add(removedExpense);
+                    });
+                    final snackBar = SnackBar(
+                      backgroundColor: Colors.grey.shade200,
+                      content: const Text(
+                        "Harcama listesini sildiniz!",
+                        style: TextStyle(color: Colors.red, fontSize: 16),
+                      ),
+                      action: SnackBarAction(
+                        backgroundColor: Colors.green,
+                          label: "Geri al", textColor: Colors.white,
+                          onPressed: () {
+                            setState(() {
+                              undoRemoveExpense(index);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.grey.shade200,
+                                  content: const Text(
+                                    "geri alındı.",
+                                    style: TextStyle(
+                                        color: Colors.green, fontSize: 16),
+                                  ),
+                                ),
+                              );
+                            });
+                          }),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
                 );
               },

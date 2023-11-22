@@ -16,7 +16,7 @@ class ExpenseItem extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10),
               child: Text(
                 expense.name,
-                style: TextStyle(fontSize: 16),
+                style:const TextStyle(fontSize: 16),
               ),
             ),
             Row(

@@ -36,12 +36,39 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  bool light = true;
+
+  final MaterialStateProperty<Icon?> thumbIcon =
+      MaterialStateProperty.resolveWith<Icon?>(
+    (Set<MaterialState> states) {
+      if (states.contains(MaterialState.selected)) {
+        return const Icon(
+          Icons.nightlight,
+          color: Colors.white,
+        );
+      }
+      return const Icon(Icons.sunny);
+    },
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurpleAccent,
-        title: const Text("Expense App"),
+        title: Center(
+            child: const Text(
+          "Expense App",
+          style: TextStyle(fontSize: 24),
+        )),
+        leading: Switch(
+            thumbIcon: thumbIcon,
+            value: light,
+            activeColor: Colors.black,
+            onChanged: (bool value) {
+              setState(() {
+                light = value;
+              });
+            }),
         actions: [
           IconButton(
               onPressed: () {
