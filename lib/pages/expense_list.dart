@@ -1,4 +1,5 @@
 import 'package:expenseapp/models/expense.dart';
+import 'package:expenseapp/widgets/chart/chart.dart';
 import 'package:expenseapp/widgets/expense_item.dart';
 import 'package:flutter/material.dart';
 
@@ -28,9 +29,9 @@ class _ExpenseListState extends State<ExpenseList> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(
-            height: 150,
-            child: Text("Grafik"),
+          SizedBox(
+            height: 250,
+            child:Chart(expenses: widget.expenses,),
           ),
           Expanded(
             child: ListView.builder(
@@ -52,8 +53,9 @@ class _ExpenseListState extends State<ExpenseList> {
                         style: TextStyle(color: Colors.red, fontSize: 16),
                       ),
                       action: SnackBarAction(
-                        backgroundColor: Colors.green,
-                          label: "Geri al", textColor: Colors.white,
+                          backgroundColor: Colors.green,
+                          label: "Geri al",
+                          textColor: Colors.white,
                           onPressed: () {
                             setState(() {
                               undoRemoveExpense(index);

@@ -14,12 +14,12 @@ class _MainPageState extends State<MainPage> {
   final List<Expense> expenses = [
     Expense(
         name: "Yiyecek",
-        price: 200.524,
+        price: 200,
         date: DateTime.now(),
         category: Category.food),
     Expense(
         name: "Flutter Udemy Course",
-        price: 200,
+        price: 400,
         date: DateTime.now(),
         category: Category.education),
   ];
